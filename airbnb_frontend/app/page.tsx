@@ -1,10 +1,10 @@
 import Image from "next/image";
+import Categories from "./components/Categories";
 
 export default function Home() {
   return (
-    <main className="">
-      AirBnB
-      <h2 className="text-airbnb">Django and next rules</h2>
+    <main className="max-w-[2000px] mx-auto px-6">
+      <Categories />
     </main>
   );
 }
