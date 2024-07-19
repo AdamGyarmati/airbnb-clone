@@ -1,8 +1,4 @@
-interface CustomButtonProps {
-  label: string;
-  onClick?: () => void;
-  className?: string;
-}
+import { CustomButtonProps } from "@/app/types/CustomButtonProps";
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   label,
