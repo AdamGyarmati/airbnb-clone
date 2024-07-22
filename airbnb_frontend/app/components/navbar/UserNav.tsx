@@ -3,7 +3,7 @@
 import { useState } from "react";
 import MenuLink from "./MenuLink";
 import useLoginModal from "@/app/hooks/useLoginModal";
-import useSignupModal from "@/app/hooks/useSignUpModal";
+import useSignupModal from "@/app/hooks/useSignupModal";
 
 const UserNav = () => {
   const loginModal = useLoginModal();
