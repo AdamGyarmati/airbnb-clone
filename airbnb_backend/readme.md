@@ -6,7 +6,7 @@
 docker-compose exec <service-name> python manage.py startapp <project-name>
 ```
 
-### Delete everythin from db
+### Delete everything from db
 
 ```bash
 docker-compose exec <service-name> python manage.py flush
