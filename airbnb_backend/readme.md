@@ -23,3 +23,9 @@ docker-compose exec <service-name> python manage.py makemkigrations
 ```bash
 docker-compose exec <service-name> python manage.py migrate
 ```
+
+### Make superuser
+
+```bash
+docker exec -it container_id python manage.py createsuperuser
+```

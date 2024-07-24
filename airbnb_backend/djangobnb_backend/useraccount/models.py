@@ -49,17 +49,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = ["name"]
 
-    groups = models.ManyToManyField(
-        "auth.Group",
-        related_name="custom_user_groups",
-        blank=True,
-        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
-        verbose_name="groups",
-    )
-    user_permissions = models.ManyToManyField(
-        "auth.Permission",
-        related_name="custom_user_permissions",
-        blank=True,
-        help_text="Specific permissions for this user.",
-        verbose_name="user permissions",
-    )
+    def avatar_url(self):
+        if self.avatar:
+            return f"{settings.WEBSITE_URL}{self.avatar.url}"
+        else:
+            return ""
+
+    # groups = models.ManyToManyField(
+    #     "auth.Group",
+    #     related_name="custom_user_groups",
+    #     blank=True,
+    #     help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+    #     verbose_name="groups",
+    # )
+    # user_permissions = models.ManyToManyField(
+    #     "auth.Permission",
+    #     related_name="custom_user_permissions",
+    #     blank=True,
+    #     help_text="Specific permissions for this user.",
+    #     verbose_name="user permissions",
+    # )
