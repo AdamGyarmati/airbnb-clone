@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { SignupModalStore } from "../types/signupModalStore";
+import { SignupModalStore } from "../models/signupModalStore";
 
 const useSignupModal = create<SignupModalStore>((set) => ({
   isOpen: false,

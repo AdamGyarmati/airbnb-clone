@@ -2,7 +2,7 @@
 
 import Modal from "./Modal";
 import { useState } from "react";
-import useSignupModal from "@/app/hooks/useSignUpModal";
+import useSignupModal from "@/app/hooks/useSignupModal";
 import CustomButton from "../forms/CustomButton";
 
 const SignupModal = () => {

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { LoginModalStore } from "../types/loginModalStore";
+import { LoginModalStore } from "../models/loginModalStore";
 
 const useLoginModal = create<LoginModalStore>((set) => ({
   isOpen: false,
