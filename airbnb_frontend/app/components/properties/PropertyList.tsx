@@ -3,26 +3,20 @@
 import { useEffect, useState } from "react";
 import PropertyListItem from "./PropertyListItem";
 import { PropertyModel } from "@/app/models/propertyModel";
+import apiService from "@/app/services/apiService";
+import { url } from "inspector";
 
 const PropertyList = () => {
   const [properties, setProperties] = useState<PropertyModel[]>([]);
+  const url = "/api/properties/";
   const getProperties = async () => {
-    const url = "http://localhost:8000/api/properties/";
+    const tmpPorperties = await apiService.get(url);
 
-    await fetch(url, {
-      method: "GET",
-    })
-      .then(response => response.json())
-      .then((json) => {
-        console.log(json);
-
-        setProperties(json.data);
-      })
-      .catch(error => console.log(error));
+    setProperties(tmpPorperties.data);
   };
 
   useEffect(() => {
-    getProperties()
+    getProperties();
   }, []);
 
   return(
