@@ -1,6 +1,6 @@
 "use client";
 
-import { ModalProps } from "@/app/models/modalProps";
+import { ModalProps } from "@/app/props/modalProps";
 import { useCallback, useEffect, useState } from "react";
 
 const Modal: React.FC<ModalProps> = ({

@@ -1,6 +1,6 @@
 "use client";
 
-import { MenuLinkProps } from "@/app/models/menuLinkProps";
+import { MenuLinkProps } from "@/app/props/menuLinkProps";
 
 const MenuLink: React.FC<MenuLinkProps> = ({
   label,

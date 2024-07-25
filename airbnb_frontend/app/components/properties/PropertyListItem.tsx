@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PropertyProps } from "@/app/models/propertyProps";
+import { PropertyProps } from "@/app/props/propertyProps";
 
 const PropertyListItem: React.FC<PropertyProps> = ({
   property
