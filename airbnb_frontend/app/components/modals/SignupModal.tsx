@@ -25,7 +25,7 @@ const SignupModal = () => {
 
     const url = "/api/auth/register/";
 
-    const response = await apiService.post(url, formData);
+    const response = await apiService.postWithoutToken(url, formData);
 
     if (response.access) {
       handleLogin(response.user.pk, response.access, response.refresh);
