@@ -11,4 +11,9 @@ urlpatterns = [
         api.property_reservations,
         name="api_property_reservations",
     ),
+    path(
+        "<uuid:pk>/toggle_favorite/",
+        api.toggle_favorite,
+        name="api_toggle_favorite",
+    ),
 ]

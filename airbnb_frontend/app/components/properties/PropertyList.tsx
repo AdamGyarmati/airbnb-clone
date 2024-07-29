@@ -10,6 +10,25 @@ const PropertyList: React.FC<PropertyListProps> = ({
   landlord_id,
 }) => {
   const [properties, setProperties] = useState<PropertyModel[]>([]);
+
+  const markFavorite = (id: string, is_favorite:boolean) => {
+    const tmpPorperties = properties.map((property: PropertyModel) => {
+      if (property.id === id) {
+        property.is_favorite = is_favorite;
+
+        if (is_favorite) {
+          console.log("added to list of favorited proeprties.");
+        } else {
+          console.log("removed from list of favorited proeprties.");
+        }
+      }
+
+      return property;
+    })
+
+    setProperties(tmpPorperties);
+   }
+
   const getProperties = async () => {
     let url = `/api/properties/`;
 
@@ -19,7 +38,14 @@ const PropertyList: React.FC<PropertyListProps> = ({
 
     const tmpPorperties = await apiService.get(url);
 
-    setProperties(tmpPorperties.data);
+    setProperties(tmpPorperties.data.map((property: PropertyModel) => {
+      if (tmpPorperties.favorites.includes(property.id)) {
+        property.is_favorite = true;
+      } else {
+        property.is_favorite = false;
+      }
+      return property;
+    }));
   };
 
   useEffect(() => {
@@ -33,7 +59,8 @@ const PropertyList: React.FC<PropertyListProps> = ({
         <PropertyListItem
           key={property.id}
           property={property}
-          />
+          markFavorite={(is_favorite: any) => markFavorite(property.id, is_favorite)}
+        />
       )
     })}
     </>
