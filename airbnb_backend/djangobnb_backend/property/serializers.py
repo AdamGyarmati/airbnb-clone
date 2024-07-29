@@ -15,7 +15,7 @@ class PropertiesListSerializer(serializers.ModelSerializer):
 
 
 class PropertyDetailSerializer(serializers.ModelSerializer):
-    landlord = USerDetailSerializer(read_only=True, many=False)
+    landlord = UserDetailSerializer(read_only=True, many=False)
 
     class Meta:
         model = Property
