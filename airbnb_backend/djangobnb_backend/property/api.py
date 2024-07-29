@@ -5,7 +5,11 @@ from rest_framework.decorators import (
     permission_classes,
 )
 from .models import Property, Reservation
-from .serializers import PropertiesListSerializer, PropertyDetailSerializer
+from .serializers import (
+    PropertiesListSerializer,
+    PropertyDetailSerializer,
+    ReservationsListSerializer,
+)
 from .forms import PropertyForm
 
 
@@ -31,6 +35,18 @@ def properties_detail(request, pk):
     serializer = PropertyDetailSerializer(property, many=False)
 
     return JsonResponse(serializer.data)
+
+
+@api_view(["GET"])
+@authentication_classes([])
+@permission_classes([])
+def property_reservations(request, pk):
+    property = Property.objects.get(pk=pk)
+    reservations = property.reservations.all()
+
+    serializer = ReservationsListSerializer(reservations, many=True)
+
+    return JsonResponse(serializer.data, safe=False)
 
 
 @api_view(["POST", "FILES"])
@@ -68,6 +84,7 @@ def book_property(request, pk):
             guests=guests,
             created_by=request.user,
         )
+        return JsonResponse({"success": True})
     except Exception as e:
         print("Error", e)
 

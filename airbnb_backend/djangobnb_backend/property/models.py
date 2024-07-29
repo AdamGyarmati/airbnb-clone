@@ -33,8 +33,8 @@ class Reservation(models.Model):
     property = models.ForeignKey(
         Property, related_name="reservations", on_delete=models.CASCADE
     )
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateField()
+    end_date = models.DateField()
     number_of_nights = models.IntegerField()
     guests = models.IntegerField()
     total_price = models.FloatField()
