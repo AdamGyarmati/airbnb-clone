@@ -24,6 +24,18 @@ docker-compose exec <service-name> python manage.py makemkigrations
 docker-compose exec <service-name> python manage.py migrate
 ```
 
+### Show migrations
+
+```bash
+docker-compose exec <service-name> python manage.py showmigrations
+```
+
+### Fake migrations
+
+```bash
+docker-compose exec <service-name> python manage.py migrate <app-name> <migrations-name> --fake
+```
+
 ### Make superuser
 
 ```bash

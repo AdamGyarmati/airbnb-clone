@@ -8,6 +8,7 @@ import { PropertyListProps } from "@/app/props/propertyListProps";
 
 const PropertyList: React.FC<PropertyListProps> = ({
   landlord_id,
+  favorites,
 }) => {
   const [properties, setProperties] = useState<PropertyModel[]>([]);
 
@@ -34,6 +35,8 @@ const PropertyList: React.FC<PropertyListProps> = ({
 
     if (landlord_id) {
       url += `?landlord_id=${landlord_id}`
+    } else if (favorites) {
+      url += "?is_favorites=true"
     }
 
     const tmpPorperties = await apiService.get(url);
