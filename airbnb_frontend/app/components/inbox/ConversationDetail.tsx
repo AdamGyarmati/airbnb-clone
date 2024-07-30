@@ -11,6 +11,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   conversation,
   userId,
   token,
+  messages,
 }) => {
   const messagesDiv = useRef<HTMLDivElement>(null);
   const [newMessage, setNewMessage] = useState("");
@@ -74,6 +75,18 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   return(
     <>
       <div ref={messagesDiv} className="max-h-[400px] overflow-auto flex flex-col space-y-4">
+
+      {messages.map((message, index) => {
+          return (
+            <div
+              key={index}
+              className={`w-[80%] py-4 px-6 rounded-xl ${message.created_by.name === myUser?.name ? 'ml-[20%] bg-blue-200' : 'bg-gray-200'}`}
+            >
+              <p className="font-bold text-gray-500">{message.created_by.name}</p>
+              <p>{message.body}</p>
+            </div>
+          )
+        })}
 
         {realTimeMessages.map((message, index) => {
           return (
