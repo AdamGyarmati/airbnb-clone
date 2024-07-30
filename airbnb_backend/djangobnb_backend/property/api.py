@@ -29,7 +29,7 @@ def properties_list(request):
     except Exception as e:
         user = None
 
-    print("user", user)
+    # print("user", user)
     #
 
     favorites = []
@@ -52,7 +52,7 @@ def properties_list(request):
             if user in property.favorited.all():
                 favorites.append(property.id)
 
-    print("favorites", favorites)
+    # print("favorites", favorites)
 
     return JsonResponse(
         {
