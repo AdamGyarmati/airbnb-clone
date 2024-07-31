@@ -34,6 +34,8 @@ def properties_list(request):
 
     favorites = []
 
+    # Filter
+
     is_favorites = request.GET.get("is_favorites", "")
     landlord_id = request.GET.get("landlord_id", "")
 
@@ -46,6 +48,42 @@ def properties_list(request):
         properties = properties.filter(favorited__in=[user])
 
     serializer = PropertiesListSerializer(properties, many=True)
+
+    country = request.GET.get("country", "")
+    category = request.GET.get("category", "")
+    checkin_date = request.GET.get("checkIn", "")
+    checnkout_date = request.GET.get("checkOut", "")
+    bedrooms = request.GET.get("numBedrooms", "")
+    bathrooms = request.GET.get("numBathrooms", "")
+    guests = request.GET.get("numGuests", "")
+
+    if checkin_date and checnkout_date:
+        exact_matches = Reservation.objects.filter(
+            start_date=checkin_date
+        ) | Reservation.objects.filter(end_date=checnkout_date)
+        overlap_matches = Reservation.objects.filter(
+            start_date__lte=checkin_date, end_date__gte=checkin_date
+        )
+        all_matches = []
+        for reservation in exact_matches | overlap_matches:
+            all_matches.append(reservation.property_id)
+
+        properties = properties.exclude(id__in=all_matches)
+
+    if guests:
+        properties = properties.filter(guests__gte=guests)
+
+    if bedrooms:
+        properties = properties.filter(bedrooms__gte=bedrooms)
+
+    if bathrooms:
+        properties = properties.filter(bathrooms__gte=bathrooms)
+
+    if country:
+        properties = properties.filter(country=country)
+
+    if category and category != "undefined":
+        properties = properties.filter(category=category)
 
     if user:
         for property in properties:
