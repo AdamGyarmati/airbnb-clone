@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import PropertyListItem from "./PropertyListItem";
 import { PropertyModel } from "@/app/models/propertyModel";
 import apiService from "@/app/services/apiService";
@@ -12,6 +13,7 @@ const PropertyList: React.FC<PropertyListProps> = ({
   landlord_id,
   favorites,
 }) => {
+  const params = useSearchParams();
   const [properties, setProperties] = useState<PropertyModel[]>([]);
   const searchModal = useSearchModal();
   const country = searchModal.query.country;
@@ -95,7 +97,7 @@ const PropertyList: React.FC<PropertyListProps> = ({
 
   useEffect(() => {
     getProperties();
-  }, [category, searchModal.query]);
+  }, [category, searchModal.query, params]);
 
   return(
     <>
