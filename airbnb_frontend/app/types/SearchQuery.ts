@@ -1,7 +1,7 @@
 export type SearchQuery = {
-  country: string;
-  checkIn: Date | null;
-  checkOut: Date | null;
+  country: string | undefined;
+  checkIn: Date | undefined | null;
+  checkOut: Date | undefined | null;
   guests: number;
   bathrooms: number;
   bedrooms: number;

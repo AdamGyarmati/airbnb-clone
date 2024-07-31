@@ -8,6 +8,7 @@ import { useState } from "react";
 import CustomButton from "../forms/CustomButton";
 import { Range } from "react-date-range";
 import DatePicker from "../forms/Calendar";
+import { SearchQuery } from "@/app/types/SearchQuery";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -25,6 +26,17 @@ const SearchModal = () => {
   let content = (<></>);
 
   const closeAndSearch = () => {
+    const newSearchQuery: SearchQuery = {
+      country: country?.label,
+      checkIn: dateRange.startDate,
+      checkOut: dateRange.endDate,
+      guests: parseInt(numGuests),
+      bedrooms: parseInt(numBedrooms),
+      bathrooms: parseInt(numBathrooms),
+      category: "",
+    }
+
+    searchModal.setQuery(newSearchQuery);
     searchModal.close();
   }
 

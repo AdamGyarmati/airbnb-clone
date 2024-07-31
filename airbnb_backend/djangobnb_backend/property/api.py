@@ -47,8 +47,6 @@ def properties_list(request):
     if is_favorites:
         properties = properties.filter(favorited__in=[user])
 
-    serializer = PropertiesListSerializer(properties, many=True)
-
     country = request.GET.get("country", "")
     category = request.GET.get("category", "")
     checkin_date = request.GET.get("checkIn", "")
@@ -90,7 +88,10 @@ def properties_list(request):
             if user in property.favorited.all():
                 favorites.append(property.id)
 
+    serializer = PropertiesListSerializer(properties, many=True)
     # print("favorites", favorites)
+
+    print(serializer.data)
 
     return JsonResponse(
         {
